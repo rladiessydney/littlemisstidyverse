@@ -2,16 +2,17 @@
 library(tidyverse)
 tidy_nails <- read_csv("./datasets/tidy_nails.csv")
 
-# gather
+# gather the data into a long form data frame:
+#   key: "kind" will be either "technicians" or "salons"
+#   value: "count" will indicate the number of techs/salons
+
 long_nails <- tidy_nails %>%
-  gather(key = "kind", value = "count", technicians, salons)
+  gather(key = "kind", value = "count", 
+         technicians, salons)
 
-# make a pretty picture
-nail_art <- long_nails %>%
-  ggplot(aes(x = population, y = count)) +
-  geom_smooth(colour = "grey70", method = "lm") +
-  geom_point(aes(colour = region, shape = factor(year)), size = 2) + 
-  facet_wrap(~kind, scales = "free_y") 
+# arrange it so the output is a little prettier
+long_nails <- long_nails %>% 
+  arrange(state, kind, year)
 
-# plot it
-plot(nail_art)
+# print
+print(long_nails)

@@ -3,7 +3,7 @@ library(tidyverse)
 tidy_users <- read_csv("./datasets/tidy_users.csv")
 
 # this script contains all the source code shown in the ggplot section,
-# with some annotations added to make it a little clearer
+# with some annotations added to make it a little clearer. 
 
 # ----- PRELIMINARIES -----
 
@@ -59,12 +59,13 @@ pic3 <- tidy_users %>%
 # to the x-axis, y-axis and colour legend:
 pic4 <- tidy_users %>% 
   ggplot(aes(x = DayNum, y = Users, colour = named_month)) +
-  geom_point(size = 3, alpha = 0.2) +        # large plot markers, mostly transparent
+  geom_point(size = 3, alpha = 0.2) + # large plot markers, semi-transparent
   geom_line() + 
-  scale_x_continuous(name = "Day Number") +  # note... xlab("Day Number") does the same thing! 
+  scale_x_continuous(name = "Day Number") +  # same as xlab("Day Number")  
   scale_y_continuous(name = "User Count") + 
   scale_colour_discrete(name = "Month")
 
+# draw the pictures
 plot(pic3)
 plot(pic4)
 
@@ -79,7 +80,6 @@ pic5 <- tidy_users %>%
   ylab("Frequency")
 
 plot(pic5)
-
 
 
 # ----- BOXES AND VIOLINS ----- 
