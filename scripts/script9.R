@@ -70,7 +70,7 @@ plot(pic4)
 
 
 
-# ----- HISTOGRAMS (& FACETING) ----- 
+# ----- HISTOGRAMS ----- 
 
 pic5 <- tidy_users %>%
   ggplot(aes(x = Users)) + 
@@ -78,10 +78,90 @@ pic5 <- tidy_users %>%
   xlab("User Count") + 
   ylab("Frequency")
 
-pic6 <- pic5 + 
-  facet_wrap(~named_month)
-
-
 plot(pic5)
+
+
+
+# ----- BOXES AND VIOLINS ----- 
+
+# Let's start by creating a plot that has aesthetics only,
+# with no geoms added. It's worth taking a look at what
+# this plot looks like before the geoms appear
+pic6 <- tidy_users %>%
+  ggplot(aes(
+    x = named_month,
+    y = Users,
+    colour = named_month
+  )) 
+
+# Box and violin plots both provide methods for visualising
+# the complete distribution of a sample. The boxplot uses 
+# the Tukey "five number summary" (min, max, median, 25th and
+# 75th quantiles), whereas the violin plot relies on kernel
+# density estimation. They have different strengths and 
+# weaknesses:
+pic7 <- pic6 + geom_boxplot()
+pic8 <- pic6 + geom_violin()
+
+# draw
 plot(pic6)
+plot(pic7)
+plot(pic8)
+
+
+
+# ----- ADDING ERROR BARS ----- 
+
+# the most typical use case is adding error bars 
+# (e.g. +/- one standard error) to a plot that 
+# displays a sample mean. so first we need to 
+# summarise the data slightly differently:
+users_summary <- tidy_users %>%
+  group_by(named_month) %>%
+  summarise(
+    mean_user = mean(Users),    # mean
+    sem = sd(Users) / sqrt(n()) # standard error
+  )
+
+# first let's set this up as a plot with the 
+# appropriate aesthetics, no geoms:
+pic9 <- users_summary %>%
+  ggplot(aes(
+    x = named_month,
+    y = mean_user,
+    ymin = mean_user - sem,
+    ymax = mean_user + sem 
+  )) 
+
+# version 1: bar/column plot with error bars
+pic10 <- pic9 + 
+  geom_col() +
+  geom_errorbar(width = .5)
+
+# version 2: bar/column plot with error bars
+pic11 <- pic9 + 
+  geom_col(aes(fill = named_month)) +  # specify a fill aesthetic for this geom only
+  geom_errorbar(width = .5)
+
+# version 3: scatter plot with error bars
+pic12 <- pic9 + 
+  geom_point(size = 2) + 
+  geom_line(aes(x = as.numeric(named_month))) + # lines require *continuous* x and y
+  geom_errorbar(width = .5)
+
+# draw
+plot(pic10)
+plot(pic11)
+plot(pic12)
+
+
+# ----- FACETTING A PLOT ----- 
+
+# take our original histogram, and facet the plot by month
+pic13 <- pic5 + facet_wrap(~ named_month)
+pic14 <- pic5 + facet_grid(named_month ~ Weekday)
+
+# draw
+plot(pic13)
+plot(pic14)
 
