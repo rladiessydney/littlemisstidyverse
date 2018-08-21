@@ -1,0 +1,10 @@
+# system files
+.DS_Store
+
+# R history and session
+.Rhistory
+.RData
+
+# RStudio files
+.Rproj.user/
+.Rproj.user
