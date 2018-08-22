@@ -9,4 +9,3 @@ Some links:
 - Blog: http://rladiessydney.org/littlemisstidyverse
 - Slides: https://slides.com/djnavarro/tidyverse-for-beginners
 - Also: http://compcogscisydney.org/psyr
-
