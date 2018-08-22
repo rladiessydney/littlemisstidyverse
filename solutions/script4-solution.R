@@ -18,7 +18,8 @@ print(monthly_users)
 # then, because I like pictures, make a bar graph
 month_pic <- monthly_users %>% 
   ggplot(aes(x = Month, y = total_users)) + 
-  geom_bar(stat = "identity")  # <--- hello, sorcery
+  geom_col() 
 
 # ... and draw it
 plot(month_pic)
+

@@ -1,15 +1,21 @@
 # This script is part of a do it yourself exercise (orange slides!)
-# It won'r run properly until you edit it to fix the problems with it.
-# For this exercise, you need to find all every BROKEN-BIT and replace
+#
+# The code won't run properly until you edit it to fix the problems.
+# For this exercise, you need to find every BROKEN-BIT and replace
 # it with the right answer!
-
-# Tip: you can select lines of code and then click the RUN button 
-# above if you just want to run a few lines at a time 
+#
+# Note: It's also something of a problem solving exercise... the 
+# slides haven't actually given you the answers to these problems
+# the idea is to look at the code, the output etc, and try to work
+# it out :-)
+#
+# Tip for new users: you can select lines of code and then click 
+# the RUN button above if you just want to run a few lines at a time 
 
 # load packages
 library(BROKEN-BIT)
 
-# import the data
+# load the tidy users data set
 data_file <- "./datasets/BROKEN-BIT"  
 tidy_users <- read_csv(BROKEN-BIT)
 

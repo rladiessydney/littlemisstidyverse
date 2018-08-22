@@ -1,3 +1,5 @@
+# Another problem solving exercise!
+#
 # This script has four MISSING_PARTs that you'll need to fix
 
 # load packages
@@ -22,7 +24,8 @@ MISSING_PART
 # but we don't have any names... we'll fix that later)
 month_pic <- monthly_users %>% 
   ggplot(aes(x = Month, y = total_users)) + 
-  geom_bar(stat = "identity")  # <--- hello, sorcery
+  geom_col()  # "col" is short for columns??
 
 # ... and draw it
 plot(month_pic)
+
